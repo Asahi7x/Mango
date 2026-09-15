@@ -1,23 +1,28 @@
 [
   {
-    "ContainingType": "Mango.Services.CouponAPI.Controllers.WeatherForecastController",
+    "ContainingType": "Mango.Services.CouponAPI.Controllers.CouponController",
     "Method": "Get",
-    "RelativePath": "WeatherForecast",
+    "RelativePath": "api/Coupon",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Mango.Services.CouponAPI.Controllers.CouponController",
+    "Method": "Get",
+    "RelativePath": "api/Coupon/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Mango.Services.CouponAPI.WeatherForecast, Mango.Services.CouponAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
-    "EndpointName": "GetWeatherForecast"
+    "ReturnTypes": []
   }
 ]

@@ -1,93 +1,50 @@
 {
-  "openapi": "3.1.1",
+  "openapi": "3.0.4",
   "info": {
-    "title": "Mango.Services.CouponAPI | v1",
-    "version": "1.0.0"
+    "title": "Mango.Services.CouponAPI",
+    "version": "1.0"
   },
-  "servers": [
-    {
-      "url": "http://localhost:5172"
-    }
-  ],
   "paths": {
-    "/WeatherForecast": {
+    "/api/Coupon": {
       "get": {
         "tags": [
-          "WeatherForecast"
+          "Coupon"
         ],
-        "operationId": "GetWeatherForecast",
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WeatherForecast"
-                  }
-                }
-              }
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Coupon/{id}": {
+      "get": {
+        "tags": [
+          "Coupon"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "WeatherForecast": {
-        "type": "object",
-        "properties": {
-          "date": {
-            "type": "string",
-            "format": "date"
-          },
-          "temperatureC": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
-          },
-          "temperatureF": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
-          },
-          "summary": {
-            "type": [
-              "null",
-              "string"
-            ]
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
     }
   },
+  "components": { },
   "tags": [
     {
-      "name": "WeatherForecast"
+      "name": "Coupon"
     }
   ]
 }

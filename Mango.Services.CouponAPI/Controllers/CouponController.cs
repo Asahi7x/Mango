@@ -1,4 +1,5 @@
 ﻿using Mango.Services.CouponAPI.Data;
+using Mango.Services.CouponAPI.DTOs;
 using Mango.Services.CouponAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,19 +11,22 @@ namespace Mango.Services.CouponAPI.Controllers
     public class CouponController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private ResponseDto _response;
+
         public CouponController(AppDbContext context)
         {
             _context = context;
+            _response = new ResponseDto();
         }
 
 
         [HttpGet]
-        public object Get()
+        public ResponseDto Get()
         {
             try
             {
                 IEnumerable<Coupon> coupons = _context.Coupons.ToList();
-                return coupons;
+                _response.Result = coupons;
             }
             catch (Exception)
             {
@@ -30,7 +34,7 @@ namespace Mango.Services.CouponAPI.Controllers
                 throw;
             }
 
-            return null;
+            return _response;
         }
 
         [HttpGet]
