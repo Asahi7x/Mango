@@ -1,6 +1,5 @@
 ﻿using Mango.Services.AuthAPI.DTOs;
 using Mango.Services.AuthAPI.Services.IServices;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mango.Services.AuthAPI.Controllers
@@ -42,9 +41,22 @@ namespace Mango.Services.AuthAPI.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(LoginRequestDto loginRequestDto)
         {
-            return Ok();
+            try
+            {
+                var loginResponse = await _authService.Login(loginRequestDto);
+                _response.Result = loginResponse;
+                _response.Message = "Login existoso";
+                return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+                return BadRequest(_response);
+            }
         }
     }
 }
