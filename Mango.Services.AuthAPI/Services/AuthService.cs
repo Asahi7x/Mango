@@ -3,6 +3,7 @@ using Mango.Services.AuthAPI.DTOs;
 using Mango.Services.AuthAPI.Models;
 using Mango.Services.AuthAPI.Services.IServices;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mango.Services.AuthAPI.Services
 {
@@ -24,12 +25,16 @@ namespace Mango.Services.AuthAPI.Services
 
         public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
         {
-            var user = _context.ApplicationUsers.FirstOrDefault(u => u.UserName.ToLower() == loginRequestDto.UserName.ToLower());
+            var user = await _context.ApplicationUsers.FirstOrDefaultAsync(u => u.UserName.ToLower() == loginRequestDto.UserName.ToLower());
+
+            if (user == null)
+            {
+                return new LoginResponseDto() { User = null, Token = "" };
+            }
 
             bool isValid = await _userManager.CheckPasswordAsync(user, loginRequestDto.Password);
 
-
-            if(user == null || isValid == false)
+            if (isValid == false)
             {
                 return new LoginResponseDto() { User = null, Token = ""};
             }

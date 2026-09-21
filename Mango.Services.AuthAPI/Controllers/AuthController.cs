@@ -46,8 +46,15 @@ namespace Mango.Services.AuthAPI.Controllers
             try
             {
                 var loginResponse = await _authService.Login(loginRequestDto);
+                if (loginResponse.User == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "Usuario o contraseña incorrectos";
+                    return BadRequest(_response);
+                }
+
                 _response.Result = loginResponse;
-                _response.Message = "Login existoso";
+                _response.Message = "Login exitoso";
                 return Ok(_response);
             }
             catch (Exception ex)
