@@ -31,6 +31,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFramework
 //builder.Services.AddSingleton(mapper);
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+
 
 var app = builder.Build();
 
